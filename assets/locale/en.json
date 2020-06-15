@@ -1,0 +1,14 @@
+{   "sitename":"Ektib",
+    "greeting":"Welcome",
+    "title": "Helloooozz",
+    "signin": "Sign in",
+    "signup" : "Sign up",
+    "email_field": "Email",
+    "password_field": "Password",
+    "passwordconfirm_field": "Confirm Password",
+    "forgot_password": "forgot password?",
+    "search" : "search",
+    "firstname" : "First Name",
+    "lastname" : "Last Name",
+    "register" : "Sign up"
+}

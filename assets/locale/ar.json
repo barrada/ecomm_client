@@ -1,0 +1,14 @@
+{   "sitename":"اكتب",
+    "title": "halazzzz",
+    "greeting": "مرحباا",
+    "signin": "تسجيل دخول",
+    "signup" : "إنشاء حساب",
+    "email_field": "البريد الالكتروني",
+    "password_field": "كلمه السر",
+    "passwordconfirm_field": "تأكيد كلمه السر",
+    "forgot_password": "فقدت كلمه السر؟",
+    "search" : "بحث",
+    "firstname" : "الأسم الأول",
+    "lastname" : "الأسم ألثاني",
+    "register" : "تسجيل"
+}
