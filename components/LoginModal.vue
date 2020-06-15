@@ -32,9 +32,10 @@
                 ></v-text-field>
               </v-col> -->
               <v-col cols="12">
-                <v-text-field :label="'* ' + $t('email_field')" required solo></v-text-field>
+                <v-text-field :label="'* ' + $t('email_field')" required solo v-model="email"></v-text-field>
                 <v-text-field
                   solo
+                  v-model ="password"
                   :label="'* ' + $t('password_field')"
                   type="password"
                   required
@@ -129,6 +130,8 @@ export default {
   data() {
     return {
       name: "ahmed",
+      email:'',
+      password:'',
       dialog: false,
       dialog2: false,
   
@@ -137,7 +140,10 @@ export default {
   methods: {
     sign: function() {
     //   alert("sign");
-    this.$axios.$get(this.$axios.defaults.baseURL + "/register").then(response => {
+    this.$axios.$post(this.$axios.defaults.baseURL + "/login",{
+      email:this.email,
+      password:this.password
+    }).then(response => {
       console.log(response);    
      });
     }

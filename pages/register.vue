@@ -90,6 +90,16 @@ export default {
       var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     },
+    register:async function(email,firstname,lastname,password){
+        await this.$axios.$post(this.$axios.defaults.baseURL + "/register/add",{
+             email:this.email,
+             firstname:this.firstname,
+             lastname:this.lastname,
+             password:this.password
+         }).then(response => {
+           console.log(this.email+ ' ' + response)
+         })
+    },
      checkEmail:async function(){
         this.errors=[]
          await this.$axios.$post(this.$axios.defaults.baseURL + "/register",{
@@ -115,13 +125,17 @@ export default {
         if(this.password == ''){
         this.errors.push("password is required")
       }
-        if(this.password.length <= 8){
+        if(this.password.length <= 7){
         this.errors.push("password must be 8 chars or more")
       }
         if(this.password != this.password_confirm){
         this.errors.push("passwords don't match")
       }
-
+      if(!this.errors.length){
+        // console.log("no errors")
+        this.register(this.email,this.firstname,this.lastname,this.password)
+      }
+          
      });
      }
     //  changeAr:function(){
