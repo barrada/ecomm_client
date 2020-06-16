@@ -48,7 +48,7 @@
       <!-- <img width="30px" src="/logo.png" alt="ektib" class="mr-2">  -->
       <nuxt-link :to="localePath('index')" >
         <!-- <v-toolbar-title id="logo" v-text="title" class="" -->
-        <v-toolbar-title id="logo" v-text="lang.sitename" class=""
+        <v-toolbar-title id="logo" v-text="$t('sitename')" class=""
       /></nuxt-link>
       <v-text-field
         :label="$t('search')"

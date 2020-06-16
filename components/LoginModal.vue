@@ -45,7 +45,11 @@
                 ></v-text-field>
                 <v-row justify="end" class="mt-n8  pa-3">
                   <div cols="12">
-                    <nuxt-link to="/">{{this.lang.forgot_password}}</nuxt-link>
+                    <nuxt-link to="/resetpass" @click="closeDialog">
+                        <div @click="closeDialog">
+                          {{$t('forgot_password')}}
+                        </div>
+                    </nuxt-link>
                   </div>
                 </v-row>
 
@@ -159,6 +163,9 @@ export default {
     };
   },
   methods: {
+    closeDialog: function(){
+      this.dialog = false
+    },
     validEmail: function (email) {
       var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
