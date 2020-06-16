@@ -104,7 +104,7 @@
       >
          Sign in
       </v-btn> -->
-
+      
       <v-spacer />
       <v-badge
         class="mr-2"
@@ -161,6 +161,7 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
+      token:'',     
       items: [
         {
           icon: "mdi-apps",
@@ -200,6 +201,7 @@ export default {
      })
   },
   created(){
+    
     // console.log(this.localStorage.getItem('lang'))
     // console.log(this.$i18n.locale )
     // if(this.$i18n.locale == 'ar'){
@@ -225,12 +227,36 @@ export default {
       this.$i18n.locale = 'en'
       // switchLocalePath('ar')
     }
+    this.authorize()
     // console.log(this.lang.sitename)
     // console.log(this.$route.params)
   },
   methods:{
-   check:(lang)=>{
-    
+   authorize(){
+      //  this.client_token = "ee"
+      // console.log("exixtsssss")
+            // this.$axios.$post(this.$axios.defaults.baseURL + "/login/authorize",{
+          this.token = localStorage.getItem("token")
+        if(this.token){         
+          // console.log(this.token)
+            // console.log("exixtsssss")
+            this.$axios.defaults.headers.common['Authorization'] = "Bearer " + this.token;
+            this.$axios.$post(this.$axios.defaults.baseURL + "/login/authorize",this.$axios.defaults.headers.common['Authorization']).then(response => {
+              if(response.authorization == "success"){
+                 this.$store.commit("auth/login");
+                 this.$store.commit("auth/setUserInfo",response.data);
+                //  console.log(response.data)
+                //  console.log(this.$store.state.auth.userInfo)
+                 
+              }else{
+                 this.$store.commit("auth/logout");
+              }
+            }).catch(err => {
+              console.log(err.response.status)
+            })
+        }
+        
+        
    },
   }
 };

@@ -1,11 +1,13 @@
 <template>
   <div class="text-center">
     <v-dialog v-model="dialog" width="500" class="">
+      
       <!-- <v-btn @click = "dialog = false; dialog2 = true">close</v-btn> -->
       <!-- <LoginForm/> -->
       <!-- login form starts -->
       <v-card class="loginmodal" style="background-color:#dff3fb; ">
         <v-card-title>
+          
           <span class="headline">{{$t('signin')}}</span>
           <v-spacer></v-spacer>
 
@@ -51,6 +53,13 @@
                   >{{$t('signin')}}</v-btn
                 >
               </v-col>
+              <!-- error messages -->
+              <p v-if="errors.length">
+              <!-- <b>Please correct the following error(s):</b> -->
+             <ul>
+               <li v-for="error in errors">{{ error }}</li>
+            </ul>
+  </p>
               <v-col cols="12"> </v-col>
               <!-- <v-col cols="12" sm="6">
                 <v-select
@@ -82,10 +91,21 @@
       <!-- loginform ends -->
       <template v-slot:activator="{ on }">
         <!-- <v-btn color="#f35353 lighten-2" dark v-on="on"> -->
-        <v-btn color="#f35353" dark v-on="on">
+        <v-btn v-if="!$store.state.auth.loggedIn" color="#f35353" dark v-on="on">
           {{$t('signin')}}
         </v-btn>
+           <v-btn v-else @click="$store.commit('auth/logout')">
+        sign out 
+        <h3>{{$store.state.auth.userInfo.firstname}}</h3>
+        <!-- <h1>{{user.avatar}}</h1> -->
+      </v-btn>
+        <!-- sign out -->
+        <!-- <v-btn v-if="$store.state.auth.loggedIn" @click="alert('clicked')">
+           <v-btn v-if="!$store.state.auth.loggedIn" color="#f35353" dark v-on="on">
+          sign out
+        </v-btn> -->
       </template>
+   
       <!-- 
       <v-card>
         <v-card-title class="headline grey lighten-2" primary-title>
@@ -132,21 +152,53 @@ export default {
       name: "ahmed",
       email:'',
       password:'',
+      errors:[],
       dialog: false,
       dialog2: false,
   
     };
   },
   methods: {
+    validEmail: function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    },
     sign: function() {
-    //   alert("sign");
-    this.$axios.$post(this.$axios.defaults.baseURL + "/login",{
+      //  console.log(this.$store.state.auth.loggedIn)
+      this.errors=[]
+       if(this.email == ''){
+        this.errors.push("email is required")
+      }
+       if (!this.validEmail(this.email)) {
+        this.errors.push('Valid email required.');
+      }
+       if(this.password == ''){
+        this.errors.push("password is required")
+      }
+      if(!this.errors.length){
+         this.$axios.$post(this.$axios.defaults.baseURL + "/login",{
       email:this.email,
       password:this.password
     }).then(response => {
-      console.log(response);    
-     });
+      // console.log(response.data)      
+      
+        this.$store.commit("auth/login");
+        this.$store.commit("auth/setUserInfo",response.data);
+      this.dialog = false
+      this.$router.push("/")
+      // console.log(this.$store.state.auth.loggedIn)
+
+     
+      localStorage.setItem('token', response.token)
+     }).catch(err => {
+       this.errors.push("wrong email/password")
+      // console.log(err.response.status)
+    });
     }
+      
+      }
+    //   alert("sign");
+   
   },
    computed:{
     ...mapState({
