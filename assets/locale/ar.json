@@ -10,5 +10,7 @@
     "search" : "بحث",
     "firstname" : "الأسم الأول",
     "lastname" : "الأسم ألثاني",
-    "register" : "تسجيل"
+    "register" : "تسجيل",
+    "change_pass" : "تغيير كلمه السر",
+    "reset_pass" : "تغيير كلمه السر"
 }

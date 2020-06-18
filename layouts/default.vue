@@ -1,5 +1,7 @@
 <template>
   <v-app dark>
+
+    
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -26,7 +28,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app color="">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> 
       <!-- <v-btn
         icon
         @click.stop="miniVariant = !miniVariant"
@@ -70,6 +72,7 @@
         single-line
         class="pt-20"
       >
+      
         <template slot="selection" slot-scope="data">
           <v-avatar tile>
             <img :src="data.item.flag" />
@@ -88,6 +91,7 @@
      <v-spacer></v-spacer>
       <LangSwitch/>
      <v-spacer></v-spacer>
+     <h1 v-if="user.email_verified == 0">Please verify</h1>
 
       <!-- <v-overflow-btn
           class="my-2"
@@ -158,6 +162,7 @@ export default {
   data() {
     return {
       // locale:this.$store.state.lang.current,
+      user:{},
       clipped: false,
       drawer: false,
       fixed: false,
@@ -230,8 +235,23 @@ export default {
     this.authorize()
     // console.log(this.lang.sitename)
     // console.log(this.$route.params)
+    this.userInfo()
   },
   methods:{
+    async userInfo(){
+      await this.$axios.$post(this.$axios.defaults.baseURL + "/account/getUserInfo",{
+         token:localStorage.getItem('token'),
+ 
+
+     }).then(response => { 
+      //  console.log(response)
+       this.user = response[0]
+        // return response
+     }).catch(err => {
+       return err
+     })
+    },
+
    authorize(){
       //  this.client_token = "ee"
       // console.log("exixtsssss")

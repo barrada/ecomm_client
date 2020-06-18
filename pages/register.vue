@@ -74,6 +74,7 @@ export default {
         lastname:'',
         password:'',
         password_confirm:'',
+        lang:this.$i18n.locale,
         errors:[]
   
 
@@ -81,11 +82,26 @@ export default {
     };
   },
  computed: {
-     ...mapState({
-         lang: state=>state.lang.current
-     })
+    //  ...mapState({
+    //      lang: state=>state.lang.current
+    //  })
  },
  methods:{
+  //  send validation email to user - > server
+   sendValidation: async function (email,firstname,lang){
+    //  alert(lang)
+     await this.$axios.$post(this.$axios.defaults.baseURL + "/account/sendVerificationToken",{
+         email:this.email,
+         firstname:this.firstname,
+         lang:this.lang,
+
+     }).then(response => { 
+        console.log(response)
+     }).catch(err => {
+       console.log(err)
+     })
+   },
+    // check if email is valid in registration
     validEmail: function (email) {
       var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
@@ -97,8 +113,15 @@ export default {
              lastname:this.lastname,
              password:this.password
          }).then(response => {
-           console.log(this.email+ ' ' + response)
+          //  console.log(this.email+ ' ' + response)
+          if(response == 201){
+            // this.lang = this.$i18n.locale
+            this.sendValidation(email,firstname,this.lang)
+            this.$router.push(this.localePath('login'))
+            
+          }
          })
+        //  console.log(localStorage.getItem('lang'))
     },
      checkEmail:async function(){
         this.errors=[]

@@ -45,7 +45,7 @@
                 ></v-text-field>
                 <v-row justify="end" class="mt-n8  pa-3">
                   <div cols="12">
-                    <nuxt-link to="/resetpass" @click="closeDialog">
+                    <nuxt-link :to="localePath('account-resetpass')" @click="closeDialog">
                         <div @click="closeDialog">
                           {{$t('forgot_password')}}
                         </div>

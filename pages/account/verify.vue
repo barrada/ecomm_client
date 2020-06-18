@@ -1,0 +1,59 @@
+<template>
+  <div>
+    
+      <div v-if="activated">
+          <h1>THANK YOU FOR ACTIVATION</h1>
+          <v-btn :to="localePath('/')">Continue</v-btn>
+      </div>
+      <div v-else>
+            Verifcation not successfull <br>
+            <v-btn :to="localePath('register')">Resend Verification Email</v-btn>
+      </div>
+  </div>
+</template>
+
+<script>
+export default {
+data(){
+    return{
+        activated:false,
+        token:this.$route.query.token
+
+    }
+},
+methods:{
+    verify(){
+        // console.log(this.token)
+         this.$axios.$post(this.$axios.defaults.baseURL + "/account/verify",{
+      token:this.token
+    
+    }).then(response => {
+     
+        if(response.activation == true){
+            this.activated=true
+        }else{
+
+        } 
+      
+    //     this.$store.commit("auth/login");
+    //     this.$store.commit("auth/setUserInfo",response.data);
+    //   this.dialog = false
+    //   this.$router.push("/")
+
+     }).catch(err => {
+         console.log(err)
+    //    this.errors.push("wrong email/password")
+      // console.log(err.response.status)
+    });
+    }
+},
+mounted(){
+//   console.log(this.$route.query.token)
+this.verify()
+}
+}
+</script>
+
+<style>
+
+</style>

@@ -10,5 +10,7 @@
     "search" : "search",
     "firstname" : "First Name",
     "lastname" : "Last Name",
-    "register" : "Sign up"
+    "register" : "Sign up",
+    "change_pass" : "Reset Password",
+    "reset_pass" : "Reset Password"
 }
