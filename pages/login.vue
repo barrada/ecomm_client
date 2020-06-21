@@ -2,7 +2,7 @@
   <v-row class="text-center" justify="center">
       <v-col lg="5" >
           <div >
-
+              
       
       <!-- <v-btn @click = "dialog = false; dialog2 = true">close</v-btn> -->
       <!-- <LoginForm/> -->
@@ -36,8 +36,8 @@
                 ></v-text-field>
               </v-col> -->
               <v-col cols="12">
-                <v-text-field :label="'* ' + $t('email_field')" required solo v-model="email"></v-text-field>
-                <v-text-field
+                <v-text-field @keyup.enter="sign" :label="'* ' + $t('email_field')" required solo v-model="email"></v-text-field>
+                <v-text-field @keyup.enter="sign"
                   solo
                   v-model ="password"
                   :label="'* ' + $t('password_field')"
@@ -206,7 +206,7 @@ export default {
          lang: state=>state.lang.current
      })
   },
-  
+  mounted(){}
 };
 </script>
 

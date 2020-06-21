@@ -1,4 +1,5 @@
 <template>
+
   <v-app dark>
 
     
@@ -27,8 +28,11 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+    
     <v-app-bar :clipped-left="clipped" fixed app color="">
+      
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> 
+      
       <!-- <v-btn
         icon
         @click.stop="miniVariant = !miniVariant"
@@ -126,7 +130,9 @@
         <v-icon>mdi-menu</v-icon>
       </v-btn> -->
     </v-app-bar>
+    
     <v-content>
+      <!-- <VerifyEmailBar/> -->
       <v-container>
         <nuxt />
       </v-container>
@@ -154,10 +160,12 @@
 import { mapState } from 'vuex';
 import LoginModal from "~/components/LoginModal.vue";
 import LangSwitch from "~/components/LangSwitch.vue";
+// import VerifyEmailBar from "~/components/VerifyEmailBar.vue";
 export default {
   components: {
     LoginModal,
-    LangSwitch
+    LangSwitch,
+    // VerifyEmailBar
   },
   data() {
     return {
@@ -222,7 +230,13 @@ export default {
 
   //  this.$vuetify.rtl = true
   },
+  beforeMount(){
+    this.authorize()
+  },
   mounted(){
+      //  this.authorize()
+    this.userInfo()
+    
     if(localStorage.getItem("lang") == "ar"){
       // app.switchLocalePath('ar')
       this.$i18n.locale = 'ar'
@@ -232,10 +246,10 @@ export default {
       this.$i18n.locale = 'en'
       // switchLocalePath('ar')
     }
-    this.authorize()
+ 
     // console.log(this.lang.sitename)
     // console.log(this.$route.params)
-    this.userInfo()
+    
   },
   methods:{
     async userInfo(){
@@ -265,6 +279,7 @@ export default {
               if(response.authorization == "success"){
                  this.$store.commit("auth/login");
                  this.$store.commit("auth/setUserInfo",response.data);
+               
                 //  console.log(response.data)
                 //  console.log(this.$store.state.auth.userInfo)
                  

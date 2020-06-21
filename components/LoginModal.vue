@@ -34,8 +34,8 @@
                 ></v-text-field>
               </v-col> -->
               <v-col cols="12">
-                <v-text-field :label="'* ' + $t('email_field')" required solo v-model="email"></v-text-field>
-                <v-text-field
+                <v-text-field @keyup.enter="sign" :label="'* ' + $t('email_field')" required solo v-model="email"></v-text-field>
+                <v-text-field @keyup.enter="sign"
                   solo
                   v-model ="password"
                   :label="'* ' + $t('password_field')"
@@ -53,7 +53,7 @@
                   </div>
                 </v-row>
 
-                <v-btn color="#31d097" cols="12" dark block @click="sign"
+                <v-btn color="#31d097" cols="12" dark block  @click="sign"
                   >{{$t('signin')}}</v-btn
                 >
               </v-col>
@@ -159,6 +159,7 @@ export default {
       errors:[],
       dialog: false,
       dialog2: false,
+      fails:0
   
     };
   },
@@ -199,6 +200,13 @@ export default {
       localStorage.setItem('token', response.token)
      }).catch(err => {
        this.errors.push("wrong email/password")
+       this.fails+=1
+      //  console.log(this.fails)
+       if(this.fails > 2){
+        //  this.$router.push(localePath('login'))
+        this.dialog=false
+        this.$router.push(this.localePath('login'))
+       }
       // console.log(err.response.status)
     });
     }

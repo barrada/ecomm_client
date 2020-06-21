@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+   
       <div v-if="activated">
           <h1>THANK YOU FOR ACTIVATION</h1>
           <v-btn :to="localePath('/')">Continue</v-btn>
@@ -88,13 +88,23 @@ methods:{
     });
     }
 },
+beforeMount(){
+
+},
 mounted(){
 //   console.log(this.$route.query.token)
 // console.log(this.$store.state.auth.userInfo)
 if(typeof this.token !== "undefined"){
     this.verify();
-    this.rese
+    // this.resend
 }
+
+// console.log(this.$store.state.auth.loggedIn)
+
+
+    // if(this.$store.state.auth.loggedIn != true){
+    //     this.$router.push(this.localePath('login'))
+    // }
 }
 }
 </script>
