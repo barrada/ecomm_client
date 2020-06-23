@@ -52,11 +52,16 @@
         <v-icon>mdi-minus</v-icon>
       </v-btn> -->
       <!-- <img width="30px" src="/logo.png" alt="ektib" class="mr-2">  -->
-      <nuxt-link :to="localePath('index')" >
+      <!-- first row -->
+      <v-row no-gutters>
+
+    
+      <nuxt-link :to="localePath('index')" class="ml-n1">
         <!-- <v-toolbar-title id="logo" v-text="title" class="" -->
         <v-toolbar-title id="logo" v-text="$t('sitename')" class=""
       /></nuxt-link>
       <v-text-field
+      dense
         :label="$t('search')"
         hide-details
         clearable
@@ -65,9 +70,12 @@
         outlined
         color="#febd69"
         single-line
-        class="mr-5 ml-5"
+        class="mr-1 ml-2"
+        cols="6"
       ></v-text-field>
-      <v-select
+    
+    <!-- country dropdown selector -->
+      <!-- <v-select
         v-model="selected"
         :items="countries"
         menu-props="auto"
@@ -76,7 +84,7 @@
         single-line
         class="pt-20"
       >
-      
+    
         <template slot="selection" slot-scope="data">
           <v-avatar tile>
             <img :src="data.item.flag" />
@@ -91,7 +99,8 @@
             <v-list-item-title> {{ data.item.text }} </v-list-item-title>
           </v-list-item-content>
         </template>
-      </v-select>
+      </v-select> -->
+      <!-- country dropdown selector ends -->
      <v-spacer></v-spacer>
       <LangSwitch/>
      <v-spacer></v-spacer>
@@ -115,14 +124,15 @@
       
       <v-spacer />
       <v-badge
-        class="mr-2"
+        class="mr-1"
         :content="cart_items"
         color="#febd69"
         overlap
-        offset-x="20"
+        offset-x="10"
       >
-        <v-icon large>shopping_cart </v-icon>
+        <v-icon medium>shopping_cart </v-icon>
       </v-badge>
+        </v-row>
       <!-- <v-btn
         icon
         @click.stop="rightDrawer = !rightDrawer"

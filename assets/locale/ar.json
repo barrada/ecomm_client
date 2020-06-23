@@ -12,5 +12,8 @@
     "lastname" : "الأسم ألثاني",
     "register" : "تسجيل",
     "change_pass" : "تغيير كلمه السر",
-    "reset_pass" : "تغيير كلمه السر"
+    "reset_pass" : "تغيير كلمه السر",
+    "email_required":"يرجى ادخال البريد الالكتروني",
+    "valid_email_required":"يرجى ادخال بريد الكتروني صحيح",
+    "password_required":"يرجى ادخال كلمه السر"
 }

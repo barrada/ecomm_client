@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-row id="reg-1" class="" justify="center">
-      <v-col cols="12" md="6">
-        <h1 class="mb-4">{{this.lang.signup}}</h1>
+      <v-col cols="12" md="6" lg="6">
+        <h1 class="mb-4">{{$t('signup')}}</h1>
         <!-- error messages starts -->
           <p v-if="errors.length">
               <b>Please correct the following error(s):</b>

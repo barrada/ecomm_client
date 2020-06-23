@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <v-row class="text-center" justify="center">
+    <v-col lg="5" cols="12">
     <!-- form to request pass reset - when token is not defined -->
     <div v-if="typeof token == 'undefined' || token == null">
       <!-- Show Email sent for pass reset -->
@@ -24,6 +25,7 @@
     </div>
     <!-- else show reset pass form -->
     <div v-else>
+      <h1 class="mb-3">Enter New Password</h1>
       <v-text-field
         :label="'* ' + $t('password_field')"
         type="password"
@@ -47,7 +49,8 @@
         {{ pass_errors[0] }}
       </div>
     </div>
-  </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -116,10 +119,10 @@ export default {
     sendEmail: async function() {
       this.errors = [];
       if (this.email == "") {
-        this.errors.push("email is required");
+        this.errors.push(this.$t('email_required'));
       }
       if (!this.validEmail(this.email)) {
-        this.errors.push("Valid email required.");
+        this.errors.push(this.$t('valid_email_required'));
       }
       if (!this.errors.length) {
         //  THIS IS WHERE I STOPPED
@@ -133,7 +136,7 @@ export default {
             // console.log(this.$store.state.auth.userInfo.email)
 
             if (response.emailSent == true) {
-              console.log("sent");
+              // console.log("sent");
               this.passform = true;
               // this.activated=true
               // this.resent = true

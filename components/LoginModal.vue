@@ -95,7 +95,7 @@
       <!-- loginform ends -->
       <template v-slot:activator="{ on }">
         <!-- <v-btn color="#f35353 lighten-2" dark v-on="on"> -->
-        <v-btn v-if="!$store.state.auth.loggedIn" color="#f35353" dark v-on="on">
+        <v-btn v-if="!$store.state.auth.loggedIn" small class="ml-2 mr-2" color="#f35353" dark v-on="on">
           {{$t('signin')}}
         </v-btn>
            <v-btn v-else @click="$store.commit('auth/logout')">

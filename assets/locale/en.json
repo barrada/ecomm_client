@@ -12,5 +12,8 @@
     "lastname" : "Last Name",
     "register" : "Sign up",
     "change_pass" : "Reset Password",
-    "reset_pass" : "Reset Password"
+    "reset_pass" : "Reset Password",
+    "email_required" : "Email is required",
+    "valid_email_required" : "Valid email required.",
+    "password_required" : "Password is required"
 }

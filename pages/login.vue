@@ -1,6 +1,6 @@
 <template>
   <v-row class="text-center" justify="center">
-      <v-col lg="5" >
+      <v-col lg="4" cols="12">
           <div >
               
       
@@ -70,7 +70,7 @@
               <p v-if="errors.length" class="mr-8" align="start">
               <!-- <b>Please correct the following error(s):</b> -->
              <ul>
-               <li v-for="error in errors">{{ error }}</li>
+               <li v-for="error in errors" >{{ error }}</li>
             </ul>
   </p>
               <v-col cols="12"> </v-col>
@@ -168,13 +168,13 @@ export default {
       //  console.log(this.$store.state.auth.loggedIn)
       this.errors=[]
        if(this.email == ''){
-        this.errors.push("Email is required")
+        this.errors.push(this.$t('email_required'))
       }
        if (!this.validEmail(this.email)) {
-        this.errors.push('Valid email required.');
+        this.errors.push(this.$t('valid_email_required'));
       }
        if(this.password == ''){
-        this.errors.push("password is required")
+        this.errors.push(this.$t('password_required'))
       }
       if(!this.errors.length){
          this.$axios.$post(this.$axios.defaults.baseURL + "/login",{
