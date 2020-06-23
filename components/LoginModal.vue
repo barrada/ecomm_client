@@ -98,18 +98,50 @@
         <v-btn v-if="!$store.state.auth.loggedIn" small class="ml-2 mr-2" color="#f35353" dark v-on="on">
           {{$t('signin')}}
         </v-btn>
-           <v-btn v-else @click="$store.commit('auth/logout')">
-        sign out 
-        <h3>{{$store.state.auth.userInfo.firstname}}</h3>
+        
+           <v-btn v-else text small>
+        <!-- sign out 
+        <h3>{{$store.state.auth.userInfo.firstname}}</h3> -->
         <!-- <h1>{{user.avatar}}</h1> -->
+        <v-menu left bottom v-if="$store.state.auth.loggedIn">
+    <template v-slot:activator="{ on, attrs }">
+      <v-btn icon small v-bind="attrs" v-on="on">
+        <!-- <v-icon>mdi-dots-vertical</v-icon> -->
+        <span>ahmed</span>
+        <!-- <v-icon>mdi-dots-vertical</v-icon> -->
+        <!-- <span>ahmed</span> -->
       </v-btn>
+    </template>
+
+    <v-list>
+      <v-list-item>
+        <v-list-item-title>Option 2</v-list-item-title>
+      </v-list-item>
+      <v-list-item>
+        <v-list-item-title>Option 3</v-list-item-title>
+      </v-list-item>
+      <v-list-item>
+        <v-list-item-title>Option 4</v-list-item-title>
+      </v-list-item>
+      <v-list-item>
+       
+        <v-btn @click="$store.commit('auth/logout')">
+          sign out
+          <h3>{{ $store.state.auth.userInfo.firstname }}</h3>
+          <!-- <h1>{{user.avatar}}</h1> -->
+        </v-btn>
+      </v-list-item>
+    </v-list>
+  </v-menu>
+      </v-btn>
+      
         <!-- sign out -->
         <!-- <v-btn v-if="$store.state.auth.loggedIn" @click="alert('clicked')">
            <v-btn v-if="!$store.state.auth.loggedIn" color="#f35353" dark v-on="on">
           sign out
         </v-btn> -->
       </template>
-   
+  
       <!-- 
       <v-card>
         <v-card-title class="headline grey lighten-2" primary-title>
@@ -146,10 +178,11 @@
 import { mapState } from 'vuex';
 import LoginForm from "@/components/LoginForm.vue";
 import RegisterForm from "@/components/RegisterForm.vue";
+import UserMenu from "@/components/UserMenu.vue";
 export default {
   components: {
     LoginForm,
-    RegisterForm
+    RegisterForm,
   },
   data() {
     return {

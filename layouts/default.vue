@@ -29,9 +29,13 @@
       </v-list>
     </v-navigation-drawer>
     
-    <v-app-bar :clipped-left="clipped" fixed app color="">
-      
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> 
+    <v-app-bar :clipped-left="clipped" fixed app color="" :prominent="mobile"  dense :class="{mobhead:mobile}">
+        <v-row no-gutters justify="start" align="center" class="">
+          <!-- menu burger icon -->
+          <v-col cols="1" class="order-3 order-md-0 order-lg-0 order-xl-0" justify="start" >
+             <v-app-bar-nav-icon small @click.stop="drawer = !drawer" /> 
+          </v-col>
+     
       
       <!-- <v-btn
         icon
@@ -53,14 +57,22 @@
       </v-btn> -->
       <!-- <img width="30px" src="/logo.png" alt="ektib" class="mr-2">  -->
       <!-- first row -->
-      <v-row no-gutters>
-
     
-      <nuxt-link :to="localePath('index')" class="ml-n1">
-        <!-- <v-toolbar-title id="logo" v-text="title" class="" -->
-        <v-toolbar-title id="logo" v-text="$t('sitename')" class=""
-      /></nuxt-link>
+
+    <!-- logo -->
+    <v-col cols="2" class="" lg="1" >
+          <nuxt-link :to="localePath('index')" class="order-start order-lg-2">
+            Ektib
+        <!-- <v-toolbar-title id="logo" v-text="$t('sitename')" class=""/> -->
+      </nuxt-link>
+    </v-col>
+
+    <!-- search -->
+    <v-col cols='11' lg="4" class="order-4 order-lg-1" >
+
+   
       <v-text-field
+
       dense
         :label="$t('search')"
         hide-details
@@ -72,8 +84,9 @@
         single-line
         class="mr-1 ml-2"
         cols="6"
+       
       ></v-text-field>
-    
+     </v-col>
     <!-- country dropdown selector -->
       <!-- <v-select
         v-model="selected"
@@ -101,9 +114,11 @@
         </template>
       </v-select> -->
       <!-- country dropdown selector ends -->
-     <v-spacer></v-spacer>
-      <LangSwitch/>
-     <v-spacer></v-spacer>
+      <!-- <v-spacer></v-spacer> -->
+     <!-- <v-col class="order-4">
+        <LangSwitch/>
+     </v-col> -->
+     <!-- <v-spacer></v-spacer> -->
      <h1 v-if="user.email_verified == 0">Please verify</h1>
 
       <!-- <v-overflow-btn
@@ -114,24 +129,47 @@
          
           target="#dropdown-example"
         ></v-overflow-btn> -->
-      <v-spacer />
-      <LoginModal />
+      <!-- <v-spacer /> -->
+      <!-- <v-col class="order-6">
+          <LoginModal />
+      </v-col> -->
+    
       <!-- <v-btn
        v-on="on"
       >
          Sign in
       </v-btn> -->
       
-      <v-spacer />
-      <v-badge
-        class="mr-1"
+ <!-- holder div for top login right-->
+     
+  
+      <v-col cols="10" lg="4" align="end" class="order-1"> 
+        <!-- lang swirtch -->
+      <!-- <v-col></v-col>     -->
+        <v-row>
+          <v-spacer></v-spacer>
+          <!-- lang switch -->
+              <LangSwitch/>
+          <!-- login link -->
+           <LoginModal />
+           <!-- user menu -->
+             <!-- <UserMenu/> -->
+          <!-- cart -->
+                   <v-badge
+        class="mx-4 mt-1"
         :content="cart_items"
         color="#febd69"
         overlap
         offset-x="10"
       >
         <v-icon medium>shopping_cart </v-icon>
-      </v-badge>
+      </v-badge> 
+    
+        </v-row>
+      <!-- cart -->
+         
+      </v-col>
+      
         </v-row>
       <!-- <v-btn
         icon
@@ -170,17 +208,20 @@
 import { mapState } from 'vuex';
 import LoginModal from "~/components/LoginModal.vue";
 import LangSwitch from "~/components/LangSwitch.vue";
+import UserMenu from "~/components/UserMenu.vue";
 // import VerifyEmailBar from "~/components/VerifyEmailBar.vue";
 export default {
   components: {
     LoginModal,
     LangSwitch,
+    UserMenu
     // VerifyEmailBar
   },
   data() {
     return {
       // locale:this.$store.state.lang.current,
       user:{},
+      mobile:false,
       clipped: false,
       drawer: false,
       fixed: false,
@@ -244,6 +285,11 @@ export default {
     this.authorize()
   },
   mounted(){
+    // console.log(this.$vuetify.breakpoint)
+    // console.log(this.$vuetify.breakpoint)
+    if(this.$vuetify.breakpoint.smAndDown == true){
+      this.mobile = true
+    }
       //  this.authorize()
     this.userInfo()
     
@@ -321,4 +367,9 @@ v-list-tile-avatar img,
 #logo {
   text-decoration: none;
 }
+.mobhead{
+  padding-top:8px;
+  /* font-size:10px */
+}
+
 </style>
