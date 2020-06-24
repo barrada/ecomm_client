@@ -95,19 +95,22 @@
       <!-- loginform ends -->
       <template v-slot:activator="{ on }">
         <!-- <v-btn color="#f35353 lighten-2" dark v-on="on"> -->
-        <v-btn v-if="!$store.state.auth.loggedIn" small class="ml-2 mr-2" color="#f35353" dark v-on="on">
+        <v-btn  v-if="!$store.state.auth.loggedIn" small class="mx-2" color="#f35353" dark v-on="on">
           {{$t('signin')}}
         </v-btn>
         
-           <v-btn v-else text small>
+           <v-btn v-else icon large width="40" >
         <!-- sign out 
         <h3>{{$store.state.auth.userInfo.firstname}}</h3> -->
         <!-- <h1>{{user.avatar}}</h1> -->
-        <v-menu left bottom v-if="$store.state.auth.loggedIn">
+        <v-menu right bottom v-if="$store.state.auth.loggedIn">
     <template v-slot:activator="{ on, attrs }">
-      <v-btn icon small v-bind="attrs" v-on="on">
+      <v-btn icon  v-bind="attrs" v-on="on">
         <!-- <v-icon>mdi-dots-vertical</v-icon> -->
-        <span>ahmed</span>
+         <v-avatar size="32">
+    <img  src="@/static/1.jpg">
+  </v-avatar>
+        <!-- <span>ahmed</span> -->
         <!-- <v-icon>mdi-dots-vertical</v-icon> -->
         <!-- <span>ahmed</span> -->
       </v-btn>
@@ -115,19 +118,40 @@
 
     <v-list>
       <v-list-item>
-        <v-list-item-title>Option 2</v-list-item-title>
+        <v-list-item-title>
+        <v-row>
+            <v-col>
+ <v-avatar>
+            <img src="@/static/1.jpg" alt="">
+           
+          </v-avatar>
+          </v-col>
+          <v-col> {{ $store.state.auth.userInfo.firstname }} <br>
+          <v-btn small outlined> <v-icon small left>edit</v-icon> edit profile </v-btn> 
+
+          </v-col>
+        </v-row>
+          <hr>
+           </v-list-item-title>
+        <hr>
       </v-list-item>
       <v-list-item>
-        <v-list-item-title>Option 3</v-list-item-title>
+        <v-list-item-title>Messages</v-list-item-title>
+      </v-list-item>
+       <v-list-item>
+        <v-list-item-title>History</v-list-item-title>
       </v-list-item>
       <v-list-item>
-        <v-list-item-title>Option 4</v-list-item-title>
+        <v-list-item-title>Account Settings</v-list-item-title>
       </v-list-item>
       <v-list-item>
        
-        <v-btn @click="$store.commit('auth/logout')">
+        <v-btn @click="$store.commit('auth/logout')" block>
+        
           sign out
-          <h3>{{ $store.state.auth.userInfo.firstname }}</h3>
+          
+          <!-- <h3>{{ $store.state.auth.userInfo.firstname }}</h3> -->
+          <v-icon right>arrow_forward</v-icon>
           <!-- <h1>{{user.avatar}}</h1> -->
         </v-btn>
       </v-list-item>

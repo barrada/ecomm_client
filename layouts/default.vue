@@ -60,9 +60,10 @@
     
 
     <!-- logo -->
-    <v-col cols="2" class="" lg="1" >
+    <v-col cols="2" class="" lg="1">
           <nuxt-link :to="localePath('index')" class="order-start order-lg-2">
-            Ektib
+            <!-- Ektib -->
+            <img src="@/static/logo.svg" alt="" width="90%">
         <!-- <v-toolbar-title id="logo" v-text="$t('sitename')" class=""/> -->
       </nuxt-link>
     </v-col>
@@ -146,25 +147,46 @@
       <v-col cols="10" lg="4" align="end" class="order-1"> 
         <!-- lang swirtch -->
       <!-- <v-col></v-col>     -->
-        <v-row>
+        <v-row class="" align="center" no-gutters>
           <v-spacer></v-spacer>
           <!-- lang switch -->
-              <LangSwitch/>
+              <v-btn v-if="!$store.state.auth.loggedIn" icon width="40" large >
+                <LangSwitch/>
+              </v-btn>
+                
+        <v-btn icon width="40" large v-if="$store.state.auth.loggedIn">
+          <v-icon size="30" >favorite_border</v-icon>
+        </v-btn>
+      <v-btn icon width="40" large v-if="$store.state.auth.loggedIn">
+              <v-icon size="30" >notifications</v-icon>
+      </v-btn>
+      <v-btn icon width="40" large v-if="$store.state.auth.loggedIn">
+         <v-icon size="30" >storefront</v-icon>
+      </v-btn>
+          
           <!-- login link -->
-           <LoginModal />
+        
+          
+               <LoginModal />
+         
+        
+          
            <!-- user menu -->
              <!-- <UserMenu/> -->
           <!-- cart -->
-                   <v-badge
-        class="mx-4 mt-1"
+              <v-btn icon width="40" large> 
+                     <v-badge
+        
         :content="cart_items"
         color="#febd69"
         overlap
         offset-x="10"
+        :value="cart_items"
       >
-        <v-icon medium>shopping_cart </v-icon>
+        <v-icon size="30">shopping_cart </v-icon>
       </v-badge> 
-    
+               
+       </v-btn>
         </v-row>
       <!-- cart -->
          
@@ -243,7 +265,7 @@ export default {
       rightDrawer: false,
       title: "Ektib",
       selected: "Egypt",
-      cart_items: 22,
+      cart_items:1,
       countries: [
         {
           text: "America",
@@ -368,8 +390,12 @@ v-list-tile-avatar img,
   text-decoration: none;
 }
 .mobhead{
-  padding-top:8px;
+  padding-top:2px;
+  /* margin-right:10px */
   /* font-size:10px */
+}
+.mobhead .row{
+  /* padding:0px 10px */
 }
 
 </style>

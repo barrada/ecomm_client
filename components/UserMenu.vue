@@ -1,6 +1,6 @@
 <template  v-slot:activator="{ on }">
-
- <!-- <v-btn
+<!-- NOT USED AT ALL FOR NOW -->
+ <v-btn
           v-if="!$store.state.auth.loggedIn"
           small
           class="ml-2 mr-2"
@@ -9,8 +9,8 @@
           v-on="on"
         >
           {{ $t("signin") }}
-        </v-btn> -->
-  <v-menu left bottom v-if="$store.state.auth.loggedIn">
+        </v-btn>
+  <v-menu left bottom v-else>
     <template v-slot:activator="{ on, attrs }">
       <v-btn icon v-bind="attrs" v-on="on">
         <!-- <v-icon>mdi-dots-vertical</v-icon> -->
