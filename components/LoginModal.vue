@@ -111,7 +111,7 @@
     <img  src="@/static/1.jpg">
     
   </v-avatar>
-   <div class="ml-n6 pl-7  " :class="{'pr-1 ml-n3':$i18n.locale = 'ar'}">
+   <div class="ml-n6 pl-7  " >
      {{ $store.state.auth.userInfo.firstname }}
    </div>
         <!-- <span>ahmed</span> -->
