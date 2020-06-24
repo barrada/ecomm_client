@@ -99,7 +99,7 @@
           {{$t('signin')}}
         </v-btn>
         
-           <v-btn v-else icon large width="40" >
+           <v-btn v-else icon large width="100" >
         <!-- sign out 
         <h3>{{$store.state.auth.userInfo.firstname}}</h3> -->
         <!-- <h1>{{user.avatar}}</h1> -->
@@ -109,7 +109,11 @@
         <!-- <v-icon>mdi-dots-vertical</v-icon> -->
          <v-avatar size="32">
     <img  src="@/static/1.jpg">
+    
   </v-avatar>
+   <div class="ml-n6 pl-7  " :class="{'pr-1 ml-n3':$i18n.locale = 'ar'}">
+     {{ $store.state.auth.userInfo.firstname }}
+   </div>
         <!-- <span>ahmed</span> -->
         <!-- <v-icon>mdi-dots-vertical</v-icon> -->
         <!-- <span>ahmed</span> -->

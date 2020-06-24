@@ -165,15 +165,16 @@
       </v-btn>
           
           <!-- login link -->
-        
+        <v-spacer></v-spacer>
           
                <LoginModal />
-         
+          <!-- {{ $store.state.auth.userInfo.firstname }} -->
         
           
            <!-- user menu -->
              <!-- <UserMenu/> -->
           <!-- cart -->
+          <v-spacer></v-spacer>
               <v-btn icon width="40" large> 
                      <v-badge
         
