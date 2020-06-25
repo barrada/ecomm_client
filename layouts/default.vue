@@ -1,6 +1,6 @@
 <template>
 
-  <v-app dark>
+  <v-app dark :class="{arabic:this.$store.state.lang.arabic}">
 
     
     <v-navigation-drawer
@@ -232,6 +232,9 @@ import { mapState } from 'vuex';
 import LoginModal from "~/components/LoginModal.vue";
 import LangSwitch from "~/components/LangSwitch.vue";
 import UserMenu from "~/components/UserMenu.vue";
+
+//  import '@/assets/css/main.css';
+
 // import VerifyEmailBar from "~/components/VerifyEmailBar.vue";
 export default {
   components: {
@@ -244,6 +247,7 @@ export default {
     return {
       // locale:this.$store.state.lang.current,
       user:{},
+      arabic:false,
       mobile:false,
       clipped: false,
       drawer: false,
@@ -287,7 +291,10 @@ export default {
          lang: state=>state.lang.current
      })
   },
-  created(){
+  created(){  
+//  if(this.$i18n.locale == 'ar'){
+//    this.arabic = true
+//  }
     
     // console.log(this.localStorage.getItem('lang'))
     // console.log(this.$i18n.locale )
@@ -308,6 +315,7 @@ export default {
     this.authorize()
   },
   mounted(){
+
     // console.log(this.$vuetify.breakpoint)
     // console.log(this.$vuetify.breakpoint)
     if(this.$vuetify.breakpoint.smAndDown == true){
@@ -319,10 +327,12 @@ export default {
     if(localStorage.getItem("lang") == "ar"){
       // app.switchLocalePath('ar')
       this.$i18n.locale = 'ar'
+      this.$store.state.lang.arabic = true
       // switchLocalePath('ar')
     }
     if(localStorage.getItem("lang") == "en"){
       this.$i18n.locale = 'en'
+          this.$store.state.lang.arabic = false
       // switchLocalePath('ar')
     }
  
@@ -331,6 +341,7 @@ export default {
     
   },
   methods:{
+ 
     async userInfo(){
       await this.$axios.$post(this.$axios.defaults.baseURL + "/account/getUserInfo",{
          token:localStorage.getItem('token'),
@@ -397,6 +408,32 @@ v-list-tile-avatar img,
 }
 .mobhead .row{
   /* padding:0px 10px */
+}
+.arabic{
+  /* background-color:red; */
+
+font-family: 'Almarai'!important;
+/* font-size:40px */
+/* color:Green!important */
+}
+/* body
+{
+  font-family: 'MarkaziText', 'Roboto', sans-serif;
+  
+} */
+/* body{
+  font-family:'MarkaziText'
+} */
+
+/* #app {
+   font-family:'MarkaziText'
+} */
+
+</style>
+<style scoped v-if="this.$i18n.locale = 'ar'">
+#app
+{
+  /* font-family: 'MarkaziText', 'Roboto', sans-serif !important */
 }
 
 </style>

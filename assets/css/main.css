@@ -1,7 +1,35 @@
-body {
+/* body {
   background-color: red !important;
   color: green!important
 }
 #test{
     color:orange!important
+} */
+
+
+
+@font-face {
+  font-family: 'MarkaziText';
+  font-weight: normal;
+  src: url('~assets/fonts/MarkaziText.ttf'); 
 }
+@font-face {
+  font-family: 'Almarai';
+  font-weight: normal;
+  src: url('~assets/fonts/Almarai-Regular.ttf'); 
+}
+
+
+
+/* div{
+  background-color: red;
+} */
+
+/* #app
+{
+  font-family: 'MarkaziText', 'Roboto', sans-serif !important
+} */
+
+/* a{
+  text-decoration:  none!important;
+} */
