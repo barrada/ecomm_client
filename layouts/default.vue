@@ -160,7 +160,7 @@
       <v-btn icon width="40" large v-if="$store.state.auth.loggedIn">
               <v-icon size="30" >notifications</v-icon>
       </v-btn>
-      <v-btn icon width="40" large v-if="$store.state.auth.loggedIn">
+      <v-btn icon width="40" large v-if="$store.state.auth.loggedIn" :to="localePath('your-shops')">
          <v-icon size="30" >storefront</v-icon>
       </v-btn>
           
@@ -184,6 +184,7 @@
         offset-x="10"
         :value="cart_items"
       >
+      
         <v-icon size="30">shopping_cart </v-icon>
       </v-badge> 
                
