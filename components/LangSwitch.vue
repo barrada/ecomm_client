@@ -4,12 +4,12 @@
       <v-btn v-if="ar == true" default class="default green btn" @click="changeEn">English</v-btn> -->
     <div @click="changeEn">
       <nuxt-link v-if="$i18n.locale !== 'en'" :to="switchLocalePath('en')">
-        English
+        EN
       </nuxt-link>
     </div>
     <div @click="changeAr">
-      <nuxt-link v-if="$i18n.locale !== 'ar'" :to="switchLocalePath('ar')">
-        عربي
+      <nuxt-link v-if="$i18n.locale !== 'ar'" :to="switchLocalePath('ar')" style="font-size:20px;text-decoration:none">
+       عربي
       </nuxt-link>
     </div>
   </div>

@@ -1,6 +1,8 @@
 <template>
-  <div class="text-center">
-    <v-dialog v-model="dialog" width="500" class="">
+  <v-row class="text-center" justify="center">
+      <v-col lg="4" cols="12">
+          <div >
+              
       
       <!-- <v-btn @click = "dialog = false; dialog2 = true">close</v-btn> -->
       <!-- <LoginForm/> -->
@@ -12,9 +14,9 @@
           <v-spacer></v-spacer>
 
           <!-- <RegisterForm name="dialog"/> -->
-          <v-btn color="#fcb800" dark :to="localePath('register')" @click="dialog = false"
+          <!-- <v-btn color="#fcb800" dark :to="localePath('register')" @click="dialog = false"
             >{{$t('signup')}}</v-btn
-          >
+          > -->
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -44,7 +46,14 @@
                   class="mt-n2"
                 ></v-text-field>
                 <v-row justify="end" class="mt-n8  pa-3">
-                  <div cols="12">
+                    <div cols="6">
+                             <nuxt-link :to="localePath('register')">
+                          {{$t('signup')}}
+                      </nuxt-link>
+                    </div>
+                    <v-spacer></v-spacer>
+                  <div cols="6">
+                     
                     <nuxt-link :to="localePath('account-resetpass')" @click="closeDialog">
                         <div @click="closeDialog">
                           {{$t('forgot_password')}}
@@ -53,15 +62,15 @@
                   </div>
                 </v-row>
 
-                <v-btn color="#31d097" cols="12" dark block  @click="sign"
+                <v-btn color="#31d097" cols="12" dark block @click="sign"
                   >{{$t('signin')}}</v-btn
                 >
               </v-col>
               <!-- error messages -->
-              <p v-if="errors.length">
+              <p v-if="errors.length" class="mr-8" align="start">
               <!-- <b>Please correct the following error(s):</b> -->
              <ul>
-               <li v-for="error in errors">{{ error }}</li>
+               <li v-for="error in errors" >{{ error }}</li>
             </ul>
   </p>
               <v-col cols="12"> </v-col>
@@ -93,83 +102,8 @@
         </v-card-actions> -->
       </v-card>
       <!-- loginform ends -->
-      <template v-slot:activator="{ on }">
-        <!-- <v-btn color="#f35353 lighten-2" dark v-on="on"> -->
-        <v-btn  v-if="!$store.state.auth.loggedIn" small class="mx-2" color="#f35353" dark v-on="on">
-          {{$t('signin')}}
-        </v-btn>
-        
-           <v-btn v-else icon large width="100" >
-        <!-- sign out 
-        <h3>{{$store.state.auth.userInfo.firstname}}</h3> -->
-        <!-- <h1>{{user.avatar}}</h1> -->
-        <v-menu right bottom v-if="$store.state.auth.loggedIn">
-    <template v-slot:activator="{ on, attrs }">
-      <v-btn icon  v-bind="attrs" v-on="on">
-        <!-- <v-icon>mdi-dots-vertical</v-icon> -->
-         <v-avatar size="32">
-    <img  src="@/static/1.jpg">
-    
-  </v-avatar>
-   <div class="ml-n6 pl-7  " >
-     {{ $store.state.auth.userInfo.firstname }}
-   </div>
-        <!-- <span>ahmed</span> -->
-        <!-- <v-icon>mdi-dots-vertical</v-icon> -->
-        <!-- <span>ahmed</span> -->
-      </v-btn>
-    </template>
 
-    <v-list>
-      <v-list-item>
-        <v-list-item-title>
-        <v-row>
-            <v-col>
- <v-avatar>
-            <img src="@/static/1.jpg" alt="">
-           
-          </v-avatar>
-          </v-col>
-          <v-col> {{ $store.state.auth.userInfo.firstname }} <br>
-          <v-btn small outlined> <v-icon small left>edit</v-icon> edit profile </v-btn> 
-
-          </v-col>
-        </v-row>
-          <hr>
-           </v-list-item-title>
-        <hr>
-      </v-list-item>
-      <v-list-item>
-        <v-list-item-title>Messages</v-list-item-title>
-      </v-list-item>
-       <v-list-item>
-        <v-list-item-title>History</v-list-item-title>
-      </v-list-item>
-      <v-list-item>
-        <v-list-item-title>Account Settings</v-list-item-title>
-      </v-list-item>
-      <v-list-item>
-       
-        <v-btn @click="$store.commit('auth/logout')" block>
-        
-          sign out
-          
-          <!-- <h3>{{ $store.state.auth.userInfo.firstname }}</h3> -->
-          <v-icon right>arrow_forward</v-icon>
-          <!-- <h1>{{user.avatar}}</h1> -->
-        </v-btn>
-      </v-list-item>
-    </v-list>
-  </v-menu>
-      </v-btn>
-      
-        <!-- sign out -->
-        <!-- <v-btn v-if="$store.state.auth.loggedIn" @click="alert('clicked')">
-           <v-btn v-if="!$store.state.auth.loggedIn" color="#f35353" dark v-on="on">
-          sign out
-        </v-btn> -->
-      </template>
-  
+   
       <!-- 
       <v-card>
         <v-card-title class="headline grey lighten-2" primary-title>
@@ -195,22 +129,21 @@
           </v-btn>
         </v-card-actions>
       </v-card> -->
-    </v-dialog>
-    <v-dialog v-model="dialog2">
-      <RegisterForm :name="dialog2" />
-    </v-dialog>
+
+ 
   </div>
+      </v-col>
+  </v-row>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 import LoginForm from "@/components/LoginForm.vue";
 import RegisterForm from "@/components/RegisterForm.vue";
-import UserMenu from "@/components/UserMenu.vue";
 export default {
   components: {
     LoginForm,
-    RegisterForm,
+    RegisterForm
   },
   data() {
     return {
@@ -220,7 +153,6 @@ export default {
       errors:[],
       dialog: false,
       dialog2: false,
-      fails:0
   
     };
   },
@@ -236,13 +168,13 @@ export default {
       //  console.log(this.$store.state.auth.loggedIn)
       this.errors=[]
        if(this.email == ''){
-        this.errors.push("email is required")
+        this.errors.push(this.$t('email_required'))
       }
        if (!this.validEmail(this.email)) {
-        this.errors.push('Valid email required.');
+        this.errors.push(this.$t('valid_email_required'));
       }
        if(this.password == ''){
-        this.errors.push("password is required")
+        this.errors.push(this.$t('password_required'))
       }
       if(!this.errors.length){
          this.$axios.$post(this.$axios.defaults.baseURL + "/login",{
@@ -261,13 +193,6 @@ export default {
       localStorage.setItem('token', response.token)
      }).catch(err => {
        this.errors.push("wrong email/password")
-       this.fails+=1
-      //  console.log(this.fails)
-       if(this.fails > 2){
-        //  this.$router.push(localePath('login'))
-        this.dialog=false
-        this.$router.push(this.localePath('login'))
-       }
       // console.log(err.response.status)
     });
     }
@@ -281,7 +206,7 @@ export default {
          lang: state=>state.lang.current
      })
   },
-  
+  mounted(){}
 };
 </script>
 

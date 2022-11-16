@@ -59,7 +59,7 @@ module.exports = {
           messages: {
             en: require('./assets/locale/en.json')
             ,
-            ar: require('./assets/locale/ar.json')
+            ar: require('./assets/locale/ar.json') 
           }
         }
       }
